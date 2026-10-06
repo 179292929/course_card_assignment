@@ -1,0 +1,86 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --ink: #10242b;
+  --muted: #53656b;
+  --paper: #f6f8f7;
+  --white: #ffffff;
+  --teal: #0f7b6c;
+  --teal-dark: #0a5a4f;
+  --sand: #e9b44c;
+  --line: #d9e2e0;
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+/* ---------- Reset and base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }  /* box model: padding counts inside width */
+body { font-family: var(--font); color: var(--ink); background: var(--paper); line-height: 1.6; }
+img { display: block; max-width: 100%; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--sand); outline-offset: 2px; }
+
+/* ---------- Navigation bar (Flexbox) ---------- */
+.site-header { background: var(--ink); position: sticky; top: 0; z-index: 10; }
+.navbar {
+  max-width: 1100px; margin: 0 auto; padding: 0 1.25rem;
+  display: flex; justify-content: space-between; align-items: center;  /* brand left, links right */
+  min-height: 64px;
+}
+.brand { color: var(--white); font-size: 1.35rem; font-weight: 700; text-decoration: none; }
+.brand span { color: var(--sand); font-weight: 400; }
+.nav-links { list-style: none; display: flex; gap: 0.5rem; }
+.nav-links a {
+  display: block; padding: 0.5rem 1rem; border-radius: 6px;
+  color: #cfdcda; text-decoration: none; font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { background: var(--teal); color: var(--white); }
+.menu-toggle {
+  display: none; background: none; color: var(--white);
+  border: 1px solid #4a5f66; border-radius: 6px; padding: 0.4rem 0.9rem; font: inherit; cursor: pointer;
+}
+
+/* ---------- Intro ---------- */
+.intro { max-width: 1100px; margin: 0 auto; padding: 4rem 1.25rem 2rem; }
+.intro h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.15; max-width: 18ch; }
+.intro p { margin-top: 1rem; max-width: 55ch; color: var(--muted); font-size: 1.1rem; }
+
+/* ---------- Card grid (CSS Grid) ---------- */
+.courses { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.courses h2 { margin-bottom: 1.5rem; font-size: 1.6rem; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* desktop: 3 per row */
+  gap: 1.5rem;
+}
+
+/* ---------- Card ---------- */
+.card {
+  display: flex; flex-direction: column;      /* lets the button sit at the bottom of every card */
+  background: var(--white); border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(16, 36, 43, 0.12); }
+.card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.card-body { display: flex; flex-direction: column; flex: 1; padding: 1.25rem; }
+.tag {
+  align-self: flex-start; background: #e3f2ef; color: var(--teal-dark);
+  font-size: 0.8rem; font-weight: 600; padding: 0.15rem 0.7rem; border-radius: 999px;
+}
+.card h3 { margin: 0.75rem 0 0.4rem; font-size: 1.2rem; }
+.card-body p { color: var(--muted); }
+.card .meta { margin: 0.75rem 0 1.25rem; font-size: 0.9rem; }
+.btn {
+  margin-top: auto; align-self: flex-start;       /* pushes button to the bottom */
+  background: var(--teal); color: var(--white); text-decoration: none; font-weight: 600;
+  padding: 0.6rem 1.2rem; border-radius: 6px; transition: background 0.2s;
+}
+.btn:hover { background: var(--teal-dark); }
+
+/* ---------- Footer ---------- */
+.site-footer { background: var(--ink); color: #cfdcda; text-align: center; padding: 2rem 1.25rem; font-size: 0.95rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {                 /* tablet: 2 per row */
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
